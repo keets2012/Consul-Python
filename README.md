@@ -1,31 +1,24 @@
-python-eureka version - 2.1M
+python-consul version - 1.1M
 =============
 
-The goal of this project is to provide an easy-to-use client interface to Eureka,
-a middle-tier load balancer open sourced and used by Netflix.
+The goal of this project is to provide an easy-to-use client interface to consul,
+a middle-tier load balancer open sourced .
 
-It's fairly straight forward to use once you hve setup Eureka itself. Consider the following script (to be run on EC2):
+It's fairly straight forward to use once you hve setup Eureka itself. Consider the following script (to be run):
 
 ```python
 
-from eureka.client import EurekaClient
+from consul.client import ConsulClient
 import logging
 
 logging.basicConfig()
 
 
-ec = EurekaClient("MyApplication",
-                  eureka_domain_name="test.yourdomain.net",
-                  region="eu-west-1",
-                  vip_address="http://app.yourdomain.net/",
-                  port=80,
-                  secure_vip_address="https://app.yourdomain.net/",
-                  secure_port=443
-)
-print ec.get_zones_from_dns()
-print ec.get_eureka_urls()
+ec = ConsulClient("testService",
+                app_id="test1",tags=["mater","v1"],Consul_url="172.16.30.254",service_port=8080,check_note="test check", check_time_out="10s",
+                 context="Consul/v2", check_name="test name", deregisterCriticalServiceAfter="90m",Service_url="172.16.33.161",consul_port="8500",
+                 ip_address=None, vip_address=None, check_type="TCP",check_content="172.16.33.161:8080",
+                 ttl=None, enableTagOverride=False, health_check_interval="10s")
 print ec.register()
-print ec.update_status("UP")  # Or ec.register("UP")
-print ec.heartbeat()
 
 ```

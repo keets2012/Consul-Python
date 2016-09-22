@@ -4,7 +4,7 @@ Every file that does not have a separate license header is licensed under the fo
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Kristian Øllegaard
+Copyright (c) 2014 Keets zhu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,6 @@ SOFTWARE.
 
 Included libraries
 ------------------
-
-**eureka/ec2metadata.py**
 
 This file is included without any changes and including the licensing header. Please consult the file directly
 for licensing and contributor information
