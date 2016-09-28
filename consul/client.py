@@ -37,14 +37,14 @@ class ConsulLogOutFailedException(ConsulClientException):
     pass
 
 class ConsulClient(object):
-    def __init__(self, app_name, app_id=None,tags=None,Consul_url=None,service_port=None,check_note=True, check_time_out=None,
+    def __init__(self, app_name,tags=None,Consul_url=None,service_port=None,check_note=True, check_time_out=None,
                  context="Consul/v2", check_name=None, deregisterCriticalServiceAfter=None,Service_url=None,consul_port=None,
                  ip_address=None, vip_address=None, check_type=None,check_content=None,
                  ttl=None, enableTagOverride=False, health_check_interval=0):
         super(ConsulClient, self).__init__()
         self.app_name = app_name
         self.Consul_url = Consul_url
-        self.app_id = app_id
+        self.app_id = Service_url + ':' + str(service_port) + ':' + app_name
         self.tags = tags
         self.service_port = service_port
         # Virtual host name by which the clients identifies this service
@@ -80,12 +80,10 @@ class ConsulClient(object):
                 "timeout":self.check_time_out,
             }
         }
-        print json.dumps(service_data)
         print self.Consul_url + ":" + self.consul_port + "/v1/agent/service/register"
         try:
             r = requests.put("http://" + self.Consul_url + ":" + self.consul_port + "/v1/agent/service/register", json.dumps(service_data),
                                         headers={'Content-Type': 'application/json'})
-            print r
             r[0].raise_for_status()
             success = True
         except (ConsulHTTPException, URLError):

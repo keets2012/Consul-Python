@@ -9,16 +9,33 @@ It's fairly straight forward to use once you hve setup Eureka itself. Consider t
 ```python
 
 from consul.client import ConsulClient
-import logging
+import os
 
-logging.basicConfig()
-
-
+SERVER_PORT = os.getenv('SERVER_PORT')
+HOST_ADDRESS = os.getenv('HOST_ADDRESS')
+CONSUL_ADDRESS = os.getenv('CONSUL_ADDRESS')
+CONSUL_PORT = os.getenv('CONSUL_PORT')
+TAGS = [os.getenv('TAGS')]
 ec = ConsulClient("testService",
-                app_id="test1",tags=["mater","v1"],Consul_url="172.16.30.254",service_port=8080,check_note="test check", check_time_out="10s",
-                 context="Consul/v2", check_name="test name", deregisterCriticalServiceAfter="90m",Service_url="172.16.33.161",consul_port="8500",
-                 ip_address=None, vip_address=None, check_type="TCP",check_content="172.16.33.161:8080",
-                 ttl=None, enableTagOverride=False, health_check_interval="10s")
+                app_id="test1",
+                tags=TAGS,
+                Consul_url=CONSUL_ADDRESS,
+                service_port=int(SERVER_PORT),
+                check_note="test check",
+                check_time_out="10s",
+                context="Consul/v2",
+                check_name="test name",
+                deregisterCriticalServiceAfter="90m",
+                Service_url=HOST_ADDRESS,
+                consul_port=CONSUL_PORT,
+                ip_address=None,
+                vip_address=None,
+                check_type="TCP",
+                check_content="172.16.33.161:8080",
+                ttl=None,
+                enableTagOverride=False,
+                health_check_interval="10s")
+
 print ec.register()
 
 ```
