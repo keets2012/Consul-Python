@@ -1,4 +1,4 @@
-python-consul version - 1.1M
+python-consul version - 1.2
 =============
 
 The goal of this project is to provide an easy-to-use client interface to consul,
@@ -16,7 +16,7 @@ HOST_ADDRESS = os.getenv('HOST_ADDRESS')
 CONSUL_ADDRESS = os.getenv('CONSUL_ADDRESS')
 CONSUL_PORT = os.getenv('CONSUL_PORT')
 TAGS = [os.getenv('TAGS')]
-ec = ConsulClient("testService",
+sc = ConsulClient("testService",
                 app_id="test1",
                 tags=TAGS,
                 Consul_url=CONSUL_ADDRESS,
@@ -36,6 +36,6 @@ ec = ConsulClient("testService",
                 enableTagOverride=False,
                 health_check_interval="10s")
 
-print ec.register()
+sc.register()
 
 ```
